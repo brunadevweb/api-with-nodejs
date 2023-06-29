@@ -18,5 +18,6 @@ module.exports = {
     'linebreak-style': ['error', 'unix'],
     'charset': 'utf-8',
     'class-method-use-this': 'off',
+    'no restricted-syntax': 'off',
   },
 };
