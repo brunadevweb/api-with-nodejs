@@ -16,6 +16,7 @@ module.exports = {
     'no-unused-vars': ['error', { argsIgnorePattern: 'next' }],
     'max-len': ['error', { code: 80 }],
     'linebreak-style': ['error', 'unix'],
-    'charset': 'utf-8'
+    'charset': 'utf-8',
+    'class-method-use-this': 'off',
   },
 };
