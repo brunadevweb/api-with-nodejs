@@ -11,7 +11,7 @@ const encrypt = (text) => {
     const encrypt = Buffer.concat([cipher.update(text.toString()), cipher.final]);
 
     return{
-        iv: iv.toString(),
+        iv: iv.toString('hex'),
         content: MediaEncryptedEvent.toString('hex'),
     };
 };
