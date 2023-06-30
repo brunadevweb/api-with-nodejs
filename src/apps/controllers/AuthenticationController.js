@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const Users = require('../models/Users');
-const { where } = require('sequelize');
+const { encrypt } = require('../utils/crypt');
 
 class AuthenticationController {
     async authenticate(req, res) {
@@ -28,6 +28,10 @@ class AuthenticationController {
         }
 
         const {id, user_name: UserName} = user;
+
+        const { iv, content } = encrypt(id);
+
+        const { newId } = '${ id }:${ content }'; 
 
         const token = jwt.sign ({id}, process.env.HASH_BCRYPT, {
             expiresIn: '7d' 
