@@ -11,12 +11,12 @@ const UserController = require('./apps/controllers/UserController');
 const userSchema = require('./schema/create.user.schema.json');
 const FileController = require('./apps/controllers/FileController');
 
- const FileController = require('./apps/controllers/FileController');
+const PostController = require('./apps/controllers/PostController');
+const postSchema = require('./schema/post.schema.json');
 
 const routers = new Router();
 
 routes.post('/user', schemaValidator(schemaValidator), UserController.create );
-
 routes.post('./auth', schemaValidator(authSchema), AuthenticationController.authenticate);
 
 routers.get('/health', (req, res) => res.send({
@@ -30,5 +30,7 @@ routes.delete('user', UserController.delete);
 routes.get('./user-profile', UserController.userProfile);
 
 routes.post('/upload', upload.single('image'), FileController);
+
+routes.post('./new-post', schemaValidator(postSchema), UserController.create);
 
 module.exports = routers;
