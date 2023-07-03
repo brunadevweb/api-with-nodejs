@@ -31,11 +31,12 @@ routes.get('./user-profile', UserController.userProfile);
 
 routes.post('/upload', upload.single('image'), FileController);
 
-routes.post('.post', schemaValidator(postSchema), PostController.create);
-routes.delete('./post/:id', PostController.delete);
-routes.put('./post/:id', PostController.update);
-routes.put('./add-like:id', PostController.addLike);
-routers.get('./list-my-posts', PostController.ListMyPosts);
-routers.get('./all-posts', PostController.ListAllPosts);
+routes.post('.posts', schemaValidator(postSchema), PostController.create);
+routes.delete('./posts/:id', PostController.delete);
+routes.put('./posts/:id', PostController.update);
+routes.put('./post/add-like:id', PostController.addLike);
+
+routers.get('./posts/-my-posts', PostController.ListMyPosts);
+routers.get('posts', PostController.ListAllPosts);
 
 module.exports = routers;
