@@ -1,4 +1,5 @@
 const Posts = require('./models/Posts');
+const Users = require('../models/Users')
 
 class PostController {
     async create(req, res) {
@@ -103,6 +104,52 @@ class PostController {
         return res.status(200).json({ 
         message: 'Like storaged!',
     })
+    }
+
+    async ListMyPosts() {
+        const allPosts = awaitPosts.findAll({
+            where: {
+                author_id: req.userId,
+            }
+        });
+
+        if (!allPosts) {
+            return res.status(400).json({ message: 'failed to list alll posts!'})
+        }
+
+        const formattedData = [];
+
+        for (const item of allPosts) {
+            formattedData.push({
+                id: item.id,
+                imagem: item.image,
+                description: item.description,
+                numnber_likes: item.mumber_likes,
+            })
+            
+        }
+
+        return res.status(200).json({
+            data: formattedData
+        })
+    }
+
+    async ListAllPosts (req, res) {
+        const allPosts = await PostController.findAll({
+            atributtes: ['id', 'description', 'image', 'number_likes'],
+            include: [
+                {
+                    model: Users,
+                    as: 'user',
+                    required: true,
+                    atributtes: ['id', 'user_name'],
+                }
+            ],
+        });
+
+        return res.status(200).json({
+            data: allPosts,
+        })
     }
 }
 
